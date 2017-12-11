@@ -1,0 +1,12 @@
+﻿  StockAccount.cpp
+c:\users\juhit\source\repos\bankingmanagement\bankingmanagement\bankingmanagement\stockaccount.cpp(14): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
+  c:\users\juhit\source\repos\bankingmanagement\bankingmanagement\bankingmanagement\stockaccount.cpp(14): note: command-line arguments:  see previous definition of '_CRT_SECURE_NO_WARNINGS'
+c:\users\juhit\source\repos\bankingmanagement\bankingmanagement\bankingmanagement\stockaccount.cpp(42): warning C4244: 'initializing': conversion from 'std::streamoff' to 'int', possible loss of data
+c:\users\juhit\source\repos\bankingmanagement\bankingmanagement\bankingmanagement\stockaccount.cpp(132): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\juhit\source\repos\bankingmanagement\bankingmanagement\bankingmanagement\stockaccount.cpp(153): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\juhit\source\repos\bankingmanagement\bankingmanagement\bankingmanagement\stockaccount.cpp(279): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  BankAccount.cpp
+c:\users\juhit\source\repos\bankingmanagement\bankingmanagement\bankingmanagement\bankaccount.cpp(35): warning C4244: 'initializing': conversion from 'std::streamoff' to 'int', possible loss of data
+  Generating Code...
+  BankingManagement.vcxproj -> C:\Users\juhit\source\repos\bankingmanagement\BankingManagement\Debug\BankingManagement.exe
+  BankingManagement.vcxproj -> C:\Users\juhit\source\repos\bankingmanagement\BankingManagement\Debug\BankingManagement.pdb (Partial PDB)

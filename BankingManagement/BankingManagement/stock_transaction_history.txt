@@ -1,0 +1,6 @@
+Event                    Company-Symbol           Number                   Price-per-share          Total value              Time                     
+BUY                      GOOG                     3                        568.964                  1706.89                  11-12-2017 12:13:18      
+BUY                      IBM                      3                        126.96                   380.88                   11-12-2017 12:13:36      
+SELL                     GOOG                     3                        568.964                  1706.89                  11-12-2017 12:13:48      
+Event                    Company-Symbol           Number                   Price-per-share          Total value              Time                     
+Event                    Company-Symbol           Number                   Price-per-share          Total value              Time                     
