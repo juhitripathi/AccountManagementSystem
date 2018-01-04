@@ -1,6 +1,4 @@
-Event                    Company-Symbol           Number                   Price-per-share          Total value              Time                     
-BUY                      GOOG                     3                        568.964                  1706.89                  11-12-2017 12:13:18      
-BUY                      IBM                      3                        126.96                   380.88                   11-12-2017 12:13:36      
-SELL                     GOOG                     3                        568.964                  1706.89                  11-12-2017 12:13:48      
-Event                    Company-Symbol           Number                   Price-per-share          Total value              Time                     
-Event                    Company-Symbol           Number                   Price-per-share          Total value              Time                     
+BUY                      GOOG                     10                       569.964                  5699.64                  19-12-2017 03:58:01      
+SELL                     GOOG                     5                        569.964                  2849.82                  19-12-2017 03:59:48      
+BUY                      MSFT                     100                      30.62                    3062                     19-12-2017 04:00:38      
+SELL                     MSFT                     100                      29.62                    2962                     19-12-2017 04:01:04      

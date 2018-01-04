@@ -1,4 +1,3 @@
-Event                    InitialAmount            Amount                   FinalAmount              Date                     
 
-WITHDRAWL                9719.12                  9000                     719.12                   11-12-2017 12:19:45      
-DEPOSIT                  719.12                   9000                     9719.12                  11-12-2017 12:20:05      
+DEPOSIT                  7050.18                  1000                     8050.18                  19-12-2017 04:01:38      
+WITHDRAWL                8050.18                  100                      7950.18                  19-12-2017 04:02:08      

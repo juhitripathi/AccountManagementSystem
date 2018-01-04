@@ -1,0 +1,8 @@
+﻿  LinkedList.cpp
+c:\users\juhit\source\repos\bankingmanagement\bankingmanagement\bankingmanagement\linkedlist.cpp(245): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\juhit\source\repos\bankingmanagement\bankingmanagement\bankingmanagement\linkedlist.cpp(317): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\juhit\source\repos\bankingmanagement\bankingmanagement\bankingmanagement\linkedlist.cpp(336): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\juhit\source\repos\bankingmanagement\bankingmanagement\bankingmanagement\linkedlist.cpp(339): warning C4244: 'initializing': conversion from 'std::streamoff' to 'int', possible loss of data
+c:\users\juhit\source\repos\bankingmanagement\bankingmanagement\bankingmanagement\linkedlist.cpp(356): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  BankingManagement.vcxproj -> C:\Users\juhit\source\repos\bankingmanagement\BankingManagement\x64\Debug\BankingManagement.exe
+  BankingManagement.vcxproj -> C:\Users\juhit\source\repos\bankingmanagement\BankingManagement\x64\Debug\BankingManagement.pdb (Partial PDB)

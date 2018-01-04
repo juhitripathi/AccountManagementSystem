@@ -1,3 +1,7 @@
+// Name: Juhi Tripathi
+// Course: 16:332:503, Programming Finance
+// Date: 12/11/2017
+
 #include "stdafx.h"
 #include <iostream>
 #include "BankAccount.h"
@@ -7,156 +11,129 @@
 
 using namespace std;
 
-BankAccount::BankAccount()
+BankAccount::BankAccount()//BankAccount constructor
 {
-	file.open("CashBalance.txt", ios::in);
-	string buff;
-	if (file.is_open())
+	input.open("CashBalance.txt");//open CashBalance file
+	string buff;//created a string buffer
+	if (input.is_open())//if the file is open
 	{
-		while (getline(file, buff))
+		while (getline(input, buff))//get contents of the file to buff
 		{
-			double value = stod(buff);
-			setCashBalance(value);
+			double value = stod(buff);//convert value of buff to double
+			setCashBalance(value);//set the cash balance with this value
 		}
 		
 	}
-	else
-		cout << "Cannot retrieve data. Unable to open the CashBalance file" << endl;
-	file.close();
-	if (getCashBalance() == 0)
+	else//if not able to open the file
 	{
+		output.open("CashBalance.txt");
+		output << 10000;
+		output.close();
+		setCashBalance(10000);
+		cout << "Cannot retrieve data. Unable to open the CashBalance file" << endl;//output error message
+	}
+	input.close();//close the file
+	
+}
+
+void BankAccount::getBalanceFile()//get balance file function to get the cash balance from file
+{
+	input.open("CashBalance.txt");//open the CashBalance file
+	string buff;//create a string buffer
+	if (input.is_open())//if file is open
+	{
+		while (getline(input, buff))//get contents of the file
+		{
+			double value = stod(buff);//convert the contents to double
+			setCashBalance(value);//set the cash balance
+		}
+		
+	}
+	else//if not able to open the file
+	{
+		output.open("CashBalance.txt");
+		output << 10000;
+		output.close();
 		setCashBalance(10000);
 	}
-	updateCashBalance();
-	file.open("bank_transaction_history.txt", ios::app);
-	if (file.is_open())
-	{
-		file.seekg(0, ios::end); // put the "cursor" at the end of the file
-		int length = file.tellg(); // find the position of the cursor
-		if (length == 0) {
-			file << left;
-			file << setw(25);
-			file << "Event";
-			file << left;
-			file << setw(25);
-			file << "InitialAmount";
-			file << left;
-			file << setw(25);
-			file << "Amount";
-			file << left;
-			file << setw(25);
-			file << "FinalAmount";
-			file << left;
-			file << setw(25);
-			file << "Date";
-			file << "\n";
-		}
-	}
-	file.close();
-
+	input.close();//close the file
 }
 
-void BankAccount::getBalanceFile()
+void BankAccount::updateCashBalance()//functionto update the cash balance
 {
-	file.open("CashBalance.txt", ios::in);
-	string buff;
-	if (file.is_open())
-	{
-		while (getline(file, buff))
-		{
-			double value = stod(buff);
-			setCashBalance(value);
-		}
-		
-	}
-	else
-	{
-		cout << "Cannot retrieve cash balance";
-	}
-	file.close();
+	output.open("CashBalance.txt");//open cash balance file
+	output << getCashBalance();//output the cash balance to file
+	output.close();//close the file
 }
 
-void BankAccount::updateCashBalance()
+BankAccount::~BankAccount()//BankAccount destructor
 {
-	fstream file;
-	file.open("CashBalance.txt");
-	file << getCashBalance();
-	file.close();
+	updateCashBalance();//update cash balance before destroying
 }
 
-BankAccount::~BankAccount()
+void BankAccount::deposit(double amount)//function to deposit the amount
 {
-	updateCashBalance();
+	if (amount < 0)//if amount is less then zero
+	{
+		cout << "Enter proper amount" << endl;//output error message
+		return;//return
+	}
+	double value=getCashBalance();//get the cash balance
+	double newValue = value + amount;//get the newvalue after depositing money
+	updateTransactionFile("DEPOSIT", value, amount, newValue);//update the transaction file
+	setCashBalance(newValue);//set new cash balance
+	updateCashBalance();//update cash balance in file
 }
-
-void BankAccount::deposit(double amount)
+void BankAccount::withdraw(double amount)//withdraw amount from bank
 {
-	if (amount < 0)
+	double value = getCashBalance();//get the cash balance value
+	if (value < amount)//if  value is less than amount
 	{
-		cout << "Enter proper amount" << endl;
-		return;
+		cout << "Insufficient Funds" << endl;//output the message
+		return;//return to caller
 	}
-	double value=getCashBalance();
-	double newValue = value + amount;
-	updateTransactionFile("DEPOSIT", value, amount, newValue);
-	setCashBalance(newValue);
-	updateCashBalance();
-}
-void BankAccount::withdraw(double amount)
-{
-	double value = getCashBalance();
-	if (value < amount)
+	if (amount < 0)//if amount is less than 0
 	{
-		cout << "Insufficient Funds" << endl;
-		return;
+		cout << "Enter proper amount" << endl;//output proper message
+		return;//return to caller
 	}
-	if (amount < 0)
-	{
-		cout << "Enter proper amount" << endl;
-		return;
-	}
-	double newValue = value - amount;
-	setCashBalance(newValue);
-	updateTransactionFile("WITHDRAWL", value, amount, newValue);
+	double newValue = value - amount;//deduct the amount withdrawn
+	setCashBalance(newValue);//set new value of cash balance
+	updateTransactionFile("WITHDRAWL", value, amount, newValue);//update the transaction file
 	
-	updateCashBalance();
+	updateCashBalance();//update the cash balance to file
 }
 
-void BankAccount::updateTransactionFile(string event, double initialValue, double amount, double newValue)
+void BankAccount::updateTransactionFile(string event, double initialValue, double amount, double newValue)//function to update transaction file
 {
-	fstream file;
-	file.open("bank_transaction_history.txt", ios::app);
-	
-	if (file.is_open())
+	output.open("bank_transaction_history.txt", ios::app);//open transaction history file
+	time_t rawtime;//calculate time
+	struct tm timeinfo;
+	char buffer[80];
+	time(&rawtime);
+	localtime_s(&timeinfo, &rawtime);
+	strftime(buffer, 80, "%d-%m-%Y %I:%M:%S", &timeinfo);
+	string s(buffer); 
+	output.flush();
+	output<<"\n"<<left<<setw(25) << event << left << setw(25) << initialValue << left << setw(25) << amount << left << setw(25) << newValue << left << setw(25) << s;//output all the values to the file
+	output.close();//close the file
+}
+
+
+
+void BankAccount::transaction_history()//function to print transaction history 
+{
+	input.open("bank_transaction_history.txt", ios::in);//open the transaction history file
+	string buff;//create string buff
+	cout << left << setw(25)<< "Event"<< left<< setw(25) << "InitialAmount"<< left << setw(25)<< "Amount" << left << setw(25)<< "FinalAmount" << left << setw(25)<< "Date"<< "\n";
+	while (getline(input, buff))//get contents of file line by line
 	{
-		time_t rawtime;
-		struct tm timeinfo;
-		char buffer[80];
-		time(&rawtime);
-		localtime_s(&timeinfo, &rawtime);
-		strftime(buffer, 80, "%d-%m-%Y %I:%M:%S", &timeinfo);
-		string s(buffer); 
-		file.flush();
-		file<<"\n"<<left<<setw(25) << event << left << setw(25) << initialValue << left << setw(25) << amount << left << setw(25) << newValue << left << setw(25) << s;
-		
+		cout << buff<<endl;//output contents of buff
 	}
-	file.close();
+	input.close();//close the file
 }
 
-
-
-void BankAccount::transaction_history() 
+void BankAccount::viewbalance()//function to view balance
 {
-	file.open("bank_transaction_history.txt", ios::in);
-	string buff;
-	while (getline(file, buff))
-	{
-		cout << buff<<endl;
-	}
-	file.close();
-}
-
-void BankAccount::viewbalance()
-{
-	cout << "Your Account Balance is: " << getCashBalance() << endl;
+	cout << "Your Account Balance is: " << getCashBalance() << endl;//output the balance
 }
